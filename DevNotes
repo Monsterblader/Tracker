@@ -4,7 +4,7 @@
 // URL parsed and inserted into appropriate field.
 // scanning bar code as starting point - search database for item.  If not found, offer to
 // create item.
-packages iron-router, googlemaps, bootstrap
+packages iron:router, mrt:googlemaps, bootstrap
 login/track user
 maintenance records.
 confirm address - get address from coords.

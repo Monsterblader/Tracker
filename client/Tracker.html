@@ -38,6 +38,7 @@
 
 <template name="itemLayout">
   <div class="itemContainer">
+    <div class="dispInl">
     <img class="dispInl" src="/{{this.itemImage}}" alt="{{this.itemName}}">
     <div class="dispInl labels">
       <div><h4>Item</h4>{{this.itemName}}</div>
@@ -47,7 +48,9 @@
       <button name="checkIn" class="checkIn btn" data-toggle="modal" onclick="checkIn({{this.itemID}})">Check in</button>
       <button name="checkOut" class="checkOut btn" data-toggle="modal" onclick="checkOut({{this.itemID}})">Check out</button>
     </div>
-    <div id="map-{{this.itemID}}" class="itemLocationMap"></div>
+
+    </div>
+    <div id="map-{{this.itemID}}" class="dispInl itemLocationMap"></div>
   </div>
 </template>
 
