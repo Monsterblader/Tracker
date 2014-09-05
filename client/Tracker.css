@@ -1,0 +1,68 @@
+/* CSS declarations go here */
+
+body {
+  background-color: #6d6d6d;
+}
+
+.detectedAddress {
+  display: inline;
+}
+
+.dispInl {
+  display: inline-block;
+}
+
+.headerSpacer {
+  margin-top: 40px;
+  padding: 10px;
+}
+
+img {
+  height: 150px;
+  margin-bottom: 10px;
+  width: 150px;
+}
+
+.itemContainer {
+  background-color: #EEEEEE;
+  border-radius: 7px;
+  display: inline-block;
+  padding: 15px;
+  margin: 0px 10px 10px 0px;
+}
+
+.itemLocationMap {
+  /*display: none;*/
+  height: 225px;
+  margin: 10px auto;
+  width: 225px;
+}
+
+.labels {
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+.navbar {
+  background-color: #222;
+  color: #eee;
+  height: 40px;
+}
+
+.navbar a {
+  margin-right: 20px;
+}
+
+.pageSize {
+  margin-left: auto;
+  margin-right: auto;
+  width: 960px;
+}
+
+.remap {
+  vertical-align: top;
+}
+
+.scanBarCode {
+  margin: 25px 0px;
+}

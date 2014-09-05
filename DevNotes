@@ -1,0 +1,17 @@
+// zxing works - do not use escaped characters.  Just use straight text.
+// zxing returns code.
+// States of activate zxing - Creating new entry.  Data needs to be preserved, then return
+// URL parsed and inserted into appropriate field.
+// scanning bar code as starting point - search database for item.  If not found, offer to
+// create item.
+packages iron-router, googlemaps, bootstrap
+login/track user
+maintenance records.
+confirm address - get address from coords.
+give option to enter address manually - get coords from address
+change orientation of object picture and map
+
+In function checkIn do:
+use jQuery to map in body.
+- create function to convert address to coords.
+- on confirm/accept, store coords.

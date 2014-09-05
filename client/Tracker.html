@@ -1,0 +1,98 @@
+<head>
+  <title>Tracker</title>
+</head>
+
+<body>
+</body>
+
+<template name="about">
+  <div class="pageSize">
+  </div>
+</template>
+
+<template name="home">
+  <h1>Hello World!</h1>
+  {{greeting}}
+  <input type="button" value="Click" />
+</template>
+
+<template name="item">
+  {{> menuBar}}
+  <div class="headerSpacer pageSize">
+    {{#if item}}
+      {{#each item}}
+        {{>itemLayout}}
+      {{/each}}
+    {{else}}
+    Add an item to inventory
+      <form id="myform" class="headerSpacer">
+        <input type="text" name="itemName" placeholder="Item description"/>
+        <input type="text" name="itemID" placeholder="Item ID" value=""/>
+        <input class="phone" type="file" name="itemCamera" enctype="multipart/form-data" accept="image/*" capture="camera">
+        <input class="web" type="file" name="itemImage" enctype="multipart/form-data" accept="image/*">
+        <input type="submit" id="submit"/>
+      </form>
+    {{/if}}
+  </div>
+</template>
+
+<template name="itemLayout">
+  <div class="itemContainer">
+    <img class="dispInl" src="/{{this.itemImage}}" alt="{{this.itemName}}">
+    <div class="dispInl labels">
+      <div><h4>Item</h4>{{this.itemName}}</div>
+      <div><h4>Item I.D.</h4>{{this.itemID}}</div>
+    </div>
+    <div>
+      <button name="checkIn" class="checkIn btn" data-toggle="modal" onclick="checkIn({{this.itemID}})">Check in</button>
+      <button name="checkOut" class="checkOut btn" data-toggle="modal" onclick="checkOut({{this.itemID}})">Check out</button>
+    </div>
+    <div id="map-{{this.itemID}}" class="itemLocationMap"></div>
+  </div>
+</template>
+
+<template name="menuBar">
+  <div class="navbar navbar-fixed-top">
+    <h5 class="pageSize">
+      <a href="/tracker">See Inventory</a>
+      <a href="/tracker/addItem">Add an item</a>
+    </h5>
+  </div>
+</template>
+
+<template name="tracker">
+  {{> menuBar}}
+  <div class="headerSpacer pageSize">
+    <button name="scanBarCode" class="scanBarCode btn" onclick="scanBarCode()">Scan a Bar Code</button>
+    <br />
+  Inventory<br />
+  {{#each inventoryList}}
+    {{> itemLayout}}
+  {{/each}}
+  </div>
+  {{> confirmAddressModal}}
+</template>
+
+<template name="confirmAddressModal">
+  <div class="confirmAddress modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Confirm your location</h3>
+        </div>
+        <div class="modal-body">
+          You appear to be at:
+          <h5 class="detectedAddress"></h5>
+          <div id="detectedMap" class="itemLocationMap" data-lat="" data-long="" data-ID=""></div>
+          <br />
+          <p>If this is not correct, enter the correct address below</p>
+          <input type="text" name="altAddress" placeholder="Type your address here" />
+          <button name="remap" class="remap btn" onclick="reMap()">Get new map</button>
+        </div>
+        <div class="modal-footer">
+          <button name="checkOut" onclick="checkOutConfirm()">Check out</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
