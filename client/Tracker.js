@@ -2,6 +2,7 @@ checkIn = function(ID) {
 	var item = inventory.findOne({itemID: "" + ID})._id;
 	var homeLocation = {lat: 37.0406475, long: -121.629169};
 	inventory.update(item, {$set: {itemLocation: homeLocation}});
+	location.reload();
 }
 
 checkOut = function(ID) {
@@ -21,8 +22,7 @@ checkOut = function(ID) {
     	$(".detectedAddress").html(addr);
     	$("#detectedMap").data("lat", newLat);
     	$("#detectedMap").data("long", newLong);
-//		inventory.upsert(item, {$set: {itemLocation: {lat: newLat, long: newLong}, timeStamp: timeStamp}});
-    })
+    });
 	});
 }
 
@@ -48,6 +48,7 @@ checkOutConfirm = function() {
     inventory.upsert(ID, {$set: {itemLocation: {lat: newLat, long: newLong}, timeStamp: timeStamp}});
 	}
 	$(".confirmAddress").modal("toggle");
+	location.reload();
 }
 
 initMap = function(myLatLong, mapDOM, markerTitle) {

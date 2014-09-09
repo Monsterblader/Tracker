@@ -7,11 +7,6 @@
 packages iron:router, mrt:googlemaps, bootstrap
 login/track user
 maintenance records.
-confirm address - get address from coords.
-give option to enter address manually - get coords from address
-change orientation of object picture and map
 
-In function checkIn do:
-use jQuery to map in body.
-- create function to convert address to coords.
-- on confirm/accept, store coords.
+bug: after creating new item, window refreshes and displays item layout.
+clicking check out attempts to open modal window that does not exist.
