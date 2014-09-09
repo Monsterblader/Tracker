@@ -23,13 +23,19 @@
       {{#each item}}
         {{>itemLayout}}
       {{/each}}
+      {{> confirmAddressModal}}
+      {{> maintenanceModal}}
     {{else}}
-    Add an item to inventory
+      Add an item to inventory
       <form id="myform" class="headerSpacer">
         <input type="text" name="itemName" placeholder="Item description"/>
+        <br />
         <input type="text" name="itemID" placeholder="Item ID" value=""/>
+        <br />
         <input class="phone" type="file" name="itemCamera" enctype="multipart/form-data" accept="image/*" capture="camera">
+        <br />
         <input class="web" type="file" name="itemImage" enctype="multipart/form-data" accept="image/*">
+        <br />
         <input type="submit" id="submit"/>
       </form>
     {{/if}}
@@ -48,7 +54,7 @@
         <button name="checkIn" class="checkIn btn" data-toggle="modal" onclick="checkIn({{this.itemID}})">Check in</button>
         <button name="checkOut" class="checkOut btn" data-toggle="modal" onclick="checkOut({{this.itemID}})">Check out</button>
         <br />
-        <button name="maintenance" class="maintenance btn" data-toggle="modal" onclick="maintenance({{this.itemID}})">Maintenance</button>
+        <button name="maintenance" class="maintenance btn" data-toggle="modal" onclick="maintOpen({{this.itemID}})">Maintenance</button>
       </div>
     </div>
     <div id="map-{{this.itemID}}" class="dispInl itemLocationMap"></div>
@@ -75,6 +81,7 @@
   {{/each}}
   </div>
   {{> confirmAddressModal}}
+  {{> maintenanceModal}}
 </template>
 
 <template name="confirmAddressModal">
@@ -95,6 +102,26 @@
         </div>
         <div class="modal-footer">
           <button name="checkOut" onclick="checkOutConfirm()">Check out</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="maintenanceModal">
+  <div class="maintenanceModal modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Maintenance Record</h3>
+        </div>
+        <div class="modal-body">
+          <input type="date" name="maintDate" placeholder="Date of service" />
+          <input type="text" name="maintNote" placeholder="Service performed" />
+        </div>
+        <div class="modal-footer">
+          <button name="maintSubmit" onclick="maintSubmit()">Submit</button>
+          <button name="maintClose" onclick="maintClose()">Cancel</button>
         </div>
       </div>
     </div>

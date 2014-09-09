@@ -7,6 +7,12 @@
 packages iron:router, mrt:googlemaps, bootstrap
 login/track user
 maintenance records.
+structure - maintenance: {Date(): {date, record}}
+The general structure:
+inventory.upsert(temp, {$set: {maintenance: {new Date(): {date:"date", record: "memo"}, new Date(): {date:"date", record:"memo"}}}})
+The change data structure:
+inventory.upsert(temp, {$set: {"maintenance.date": {date: "Coosakdgh", note: "asdgas", user: "asdglk;h"}})
 
 bug: after creating new item, window refreshes and displays item layout.
 clicking check out attempts to open modal window that does not exist.
+bug: what if not all data entered when new item submitted?

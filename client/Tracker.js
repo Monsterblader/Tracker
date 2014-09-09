@@ -55,7 +55,7 @@ initMap = function(myLatLong, mapDOM, markerTitle) {
 	GoogleMaps.init(
 	  {
 	    'sensor': true
-	  }, 
+	  },
 	  function(){
 	    var mapOptions = {
 	          zoom: 15,
@@ -70,6 +70,18 @@ initMap = function(myLatLong, mapDOM, markerTitle) {
 	    });
 	  }
 	);
+}
+
+maintClose = function() {
+	$(".maintenanceModal").modal("toggle");
+}
+
+maintOpen = function(ID) {
+	$(".maintenanceModal").modal("toggle");
+}
+
+maintSubmit = function(ID) {
+	;
 }
 
 reMap = function() {
