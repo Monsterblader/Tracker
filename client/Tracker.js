@@ -77,11 +77,20 @@ maintClose = function() {
 }
 
 maintOpen = function(ID) {
+	var item = inventory.findOne({itemID: "" + ID})._id;
+	$("input[name='idHolder']").data("ID", item);
 	$(".maintenanceModal").modal("toggle");
 }
 
 maintSubmit = function(ID) {
-	;
+	var ID = $("input[name='idHolder']").data("ID");
+	var maintDate = $("input[name='maintDate']").val();
+	var maintNote = $("input[name='maintNote']").val();
+	var timeStamp = new Date();
+	var test = {maintenance: {}};
+	test.maintenance[timeStamp] = {date: maintDate, note: maintNote, user: "asdglk;h"};
+	inventory.upsert(ID, {$set: test});
+	$(".maintenanceModal").modal("toggle");
 }
 
 reMap = function() {
@@ -194,6 +203,11 @@ Template.itemLayout.created = function() {
 	    });
 	  }
 	);
+}
+
+Template.maintenanceModal.record = function() {
+	var record = inventory.find().fetch();
+	return record;
 }
 
 Template.tracker.inventoryList = function() {
