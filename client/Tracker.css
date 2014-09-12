@@ -51,6 +51,11 @@ img {
   margin-top: 5px;
 }
 
+.maintUserText {
+	display: inline-block;
+	font-family: "Arial Black", Gadget, sans-serif;
+}
+
 .navbar {
   background-color: #222;
   color: #eee;

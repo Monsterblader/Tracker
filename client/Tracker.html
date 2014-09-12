@@ -27,7 +27,8 @@
       {{> maintenanceModal}}
     {{else}}
       Add an item to inventory
-      <form id="myform" class="headerSpacer">
+      <!-- Don't forget to change the index of 'childNodes' in Tracker.js when you modify the layout of newItemForm.-->
+      <form id="newItemForm" class="headerSpacer">
         <input type="text" name="itemName" placeholder="Item description"/>
         <br />
         <input type="text" name="itemID" placeholder="Item ID" value=""/>
@@ -76,9 +77,13 @@
     <button name="scanBarCode" class="scanBarCode btn" onclick="scanBarCode()">Scan a Bar Code</button>
     <br />
   Inventory<br />
+  {{#if inventoryList}}
   {{#each inventoryList}}
     {{> itemLayout}}
   {{/each}}
+  {{else}}
+  You have no inventory.
+  {{/if}}
   </div>
   {{> confirmAddressModal}}
   {{> maintenanceModal}}
@@ -116,11 +121,18 @@
           <h3>Maintenance Record</h3>
         </div>
         <div class="modal-body">
+					{{record}}
           {{#each record}}
-          {{#each maintenance}}
-Just need to get keys from maintenance
-            <br />
-            {{/each}}
+					// TODO: if no maintenance records, do not display.
+					{{#each maintenance}}
+					<div>
+						Service date: <div class="maintUserText">{{date}}</div>
+					</div>
+					<div>
+						Service performed: <div class="maintUserText">{{note}}</div>
+					</div>
+					<br />
+					{{/each}}
           {{/each}}
           <input name="idHolder" type="hidden" data-ID="" />
           <input name="maintDate" type="date" placeholder="Date of service" />

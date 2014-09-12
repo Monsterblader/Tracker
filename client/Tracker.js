@@ -33,7 +33,7 @@ checkOutConfirm = function() {
 	if (newAddr) {
 		var geocoder = new google.maps.Geocoder();
 		geocoder.geocode( { 'address': newAddr}, function(results, status) {
-		    if (status == google.maps.GeocoderStatus.OK) {
+			if (status === google.maps.GeocoderStatus.OK) {
 		    	var newLat = results[0].geometry.location.k;
 		    	var newLong = results[0].geometry.location.B;
 		    	inventory.upsert(ID, {$set: {itemLocation: {lat: newLat, long: newLong}, timeStamp: timeStamp}});
@@ -87,9 +87,8 @@ maintSubmit = function(ID) {
 	var maintDate = $("input[name='maintDate']").val();
 	var maintNote = $("input[name='maintNote']").val();
 	var timeStamp = new Date();
-	var test = {maintenance: {}};
-	test.maintenance[timeStamp] = {date: maintDate, note: maintNote, user: "asdglk;h"};
-	inventory.upsert(ID, {$set: test});
+	var record = {timeStamp: timeStamp, date: maintDate, note: maintNote, user: "asdf"};
+	inventory.upsert(ID, {$push: {maintenance: record}});
 	$(".maintenanceModal").modal("toggle");
 }
 
@@ -152,7 +151,7 @@ Template.item.events({
 	  template.find("input[name=itemImage]").value="";
 
 	  inventory.insert(data, function(err) { console.log(err); });
-    _.each(event.originalEvent.srcElement.childNodes[5].files, function(file) {
+    _.each(event.originalEvent.srcElement.childNodes[9].files, function(file) {
 //    	resizeBase64Img(file, 100, 100).then(function(newImg){
     		var reader = new FileReader();
     		reader.onload = (function(file) {
@@ -187,7 +186,7 @@ Template.itemLayout.created = function() {
 	    'sensor': true, //optional
 	    //'key': 'MY-GOOGLEMAPS-API-KEY', //optional
 	    //'language': 'de' //optional
-	  }, 
+	  },
 	  function(){
 	    var myLatLong = new google.maps.LatLng(itemData.itemLocation.lat, itemData.itemLocation.long);
 	    var mapOptions = {

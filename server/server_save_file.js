@@ -12,7 +12,7 @@ Meteor.methods({
     // between '/////' - which may happen after removing '..'
     path = chroot + (path ? '/' + path + '/' : '/');
     
-    // TODO Add file existance checks, etc...
+    // TODO Add file existence checks, etc...
     fs.writeFile(path + name, blob, encoding, function(err) {
       if (err) {
         throw (new Meteor.Error(500, 'Failed to save file.', err));
