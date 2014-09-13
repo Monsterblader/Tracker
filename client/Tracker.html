@@ -52,8 +52,8 @@
         <div><h4>Item I.D.</h4>{{this.itemID}}</div>
       </div>
       <div>
-        <button name="checkIn" class="checkIn btn" data-toggle="modal" onclick="checkIn({{this.itemID}})">Check in</button>
-        <button name="checkOut" class="checkOut btn" data-toggle="modal" onclick="checkOut({{this.itemID}})">Check out</button>
+        <button name="checkIn" class="checkIn btn" data-toggle="modal" onclick="checkIn('{{this._id}}')">Check in</button>
+        <button name="checkOut" class="checkOut btn" data-toggle="modal" onclick="checkOut('{{this._id}}')">Check out</button>
         <br />
         <button name="maintenance" class="maintenance btn" data-toggle="modal" onclick="maintOpen({{this.itemID}})">Maintenance</button>
       </div>
@@ -99,7 +99,7 @@
         <div class="modal-body">
           You appear to be at:
           <h5 class="detectedAddress"></h5>
-          <div id="detectedMap" class="itemLocationMap" data-lat="" data-long="" data-ID=""></div>
+          <div id="detectedMap" class="itemLocationMap"></div>
           <br />
           <p>If this is not correct, enter the correct address below</p>
           <input type="text" name="altAddress" placeholder="Type your address here" />

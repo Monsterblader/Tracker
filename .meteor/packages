@@ -8,5 +8,4 @@ insecure
 iron:router
 bootstrap
 googlemaps
-reactive-var
-
+reactive-dict
