@@ -3,7 +3,7 @@ checkIn = function(ID) {
 	var homeLocation = {lat: 37.0406475, long: -121.629169};
 	inventory.update(item, {$set: {itemLocation: homeLocation}});
 	location.reload();
-}
+};
 
 checkOut = function(ID) {
 	var item = inventory.findOne({itemID: "" + ID})._id;
@@ -24,7 +24,7 @@ checkOut = function(ID) {
     	$("#detectedMap").data("long", newLong);
     });
 	});
-}
+};
 
 checkOutConfirm = function() {
 	var ID = $("#detectedMap").data("ID");
@@ -49,7 +49,7 @@ checkOutConfirm = function() {
 	}
 	$(".confirmAddress").modal("toggle");
 	location.reload();
-}
+};
 
 initMap = function(myLatLong, mapDOM, markerTitle) {
 	GoogleMaps.init(
@@ -70,34 +70,35 @@ initMap = function(myLatLong, mapDOM, markerTitle) {
 	    });
 	  }
 	);
-}
+};
 
-maintClose = function() {
+maintClose = function () {
+	//TODO clear fields.
 	$(".maintenanceModal").modal("toggle");
-}
+};
 
 maintOpen = function(ID) {
 	var item = inventory.findOne({itemID: "" + ID})._id;
-	$("input[name='idHolder']").data("ID", item);
+	activeItem.set(item);
 	$(".maintenanceModal").modal("toggle");
-}
+};
 
 maintSubmit = function(ID) {
-	var ID = $("input[name='idHolder']").data("ID");
+	var ID = activeItem.get();
 	var maintDate = $("input[name='maintDate']").val();
 	var maintNote = $("input[name='maintNote']").val();
 	var timeStamp = new Date();
 	var record = {timeStamp: timeStamp, date: maintDate, note: maintNote, user: "asdf"};
 	inventory.upsert(ID, {$push: {maintenance: record}});
 	$(".maintenanceModal").modal("toggle");
-}
+};
 
 reMap = function() {
 	var newAddr = $("input[name='altAddress']").val();
 	$("input[name='altAddress']").val("");
 	var geocoder = new google.maps.Geocoder();
   geocoder.geocode( { 'address': newAddr}, function(results, status) {
-    if (status == google.maps.GeocoderStatus.OK) {
+    if (status === google.maps.GeocoderStatus.OK) {
     	var newLat = results[0].geometry.location.k;
     	var newLong = results[0].geometry.location.B;
     	var myLatLong = new google.maps.LatLng(newLat, newLong);
@@ -109,15 +110,15 @@ reMap = function() {
       alert('Geocode was not successful for the following reason: ' + status);
     }
   });
-}
+};
 
 scanBarCode = function() {
 	window.location="http://zxing.appspot.com/scan?ret=http://localhost:3000/tracker/item&SCAN_FORMATS=UPC_A,EAN_13";
-}
+};
 
 Template.home.greeting = function () {
   return "Welcome to Tracker.";
-}
+};
 
 Template.home.events({
   'click input': function () {
@@ -168,7 +169,7 @@ Template.item.events({
 Template.item.rendered = function() {
 	Meteor.subscribe("itemList", function() {});
 	window.location.search && $("input[name='itemID']").val(window.location.search.split("=")[1]);
-}
+};
 
 Template.item.item = function() {
 	var result;
@@ -177,13 +178,13 @@ Template.item.item = function() {
 		result = inventory.find({itemID: findBarCode[1]}).fetch();
 	}
 	return result;
-}
+};
 
 Template.itemLayout.created = function() {
 	var itemData = this.data;
 	GoogleMaps.init(
 	  {
-	    'sensor': true, //optional
+	    'sensor': true //optional
 	    //'key': 'MY-GOOGLEMAPS-API-KEY', //optional
 	    //'language': 'de' //optional
 	  },
@@ -202,18 +203,25 @@ Template.itemLayout.created = function() {
 	    });
 	  }
 	);
-}
+};
 
-Template.maintenanceModal.record = function() {
-	var record = inventory.find().fetch();
-	return record;
-}
+Template.maintenanceModal.record = function () {
+	var record = activeItem.get("ID");
+	if (record) {
+		return inventory.find(record).fetch()[0].maintenance;
+	}
+};
+
+Template.maintenanceModal.rendered = function () {
+	Meteor.subscribe('maintList', function () {
+	});
+};
 
 Template.tracker.inventoryList = function() {
 	var list = inventory.find().fetch();
 	return list;
-}
+};
 
 Template.tracker.rendered = function() {
   Meteor.subscribe('itemList', function(){ });
-}
+};

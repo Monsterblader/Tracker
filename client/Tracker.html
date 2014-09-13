@@ -121,10 +121,7 @@
           <h3>Maintenance Record</h3>
         </div>
         <div class="modal-body">
-					{{record}}
           {{#each record}}
-					// TODO: if no maintenance records, do not display.
-					{{#each maintenance}}
 					<div>
 						Service date: <div class="maintUserText">{{date}}</div>
 					</div>
@@ -132,9 +129,7 @@
 						Service performed: <div class="maintUserText">{{note}}</div>
 					</div>
 					<br />
-					{{/each}}
           {{/each}}
-          <input name="idHolder" type="hidden" data-ID="" />
           <input name="maintDate" type="date" placeholder="Date of service" />
           <input name="maintNote" type="text" placeholder="Service performed" />
         </div>
