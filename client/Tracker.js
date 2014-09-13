@@ -1,15 +1,12 @@
-checkIn = function(ID) {
-	var item = inventory.findOne({itemID: "" + ID})._id;
+checkIn = function (ID) {
 	var homeLocation = {lat: 37.0406475, long: -121.629169};
-	inventory.update(item, {$set: {itemLocation: homeLocation}});
+	inventory.update(ID, {$set: {itemLocation: homeLocation}});
 	location.reload();
 };
 
-checkOut = function(ID) {
-	var item = inventory.findOne({itemID: "" + ID})._id;
-	$("#detectedMap").data("ID", item);
+checkOut = function (ID) {
+	activeItem.set("ID", ID);
 	navigator.geolocation.getCurrentPosition(function(geoData) {
-		var item = inventory.findOne({itemID: "" + ID})._id;
 		var newLat = geoData.coords.latitude;
 		var newLong = geoData.coords.longitude;
     var geocoder = new google.maps.Geocoder();
@@ -19,15 +16,14 @@ checkOut = function(ID) {
     	var addr = results[0].formatted_address;
     	initMap(myLatLong, "detectedMap", addr);
     	$(".confirmAddress").modal("toggle");
-    	$(".detectedAddress").html(addr);
-    	$("#detectedMap").data("lat", newLat);
-    	$("#detectedMap").data("long", newLong);
+			$(".detectedAddress").html(addr);
+			activeItem.set("lat", newLat);
+			activeItem.set("long", newLong);
     });
 	});
 };
 
-checkOutConfirm = function() {
-	var ID = $("#detectedMap").data("ID");
+checkOutConfirm = function () {
 	var newAddr = $("input[name='altAddress']").val();
 	var timeStamp = new Date();
 	if (newAddr) {
@@ -43,9 +39,9 @@ checkOutConfirm = function() {
 		    }
 		  });
 	} else {
-		var newLat = $("#detectedMap").data("lat");
-		var newLong = $("#detectedMap").data("long");
-    inventory.upsert(ID, {$set: {itemLocation: {lat: newLat, long: newLong}, timeStamp: timeStamp}});
+		var newLat = activeItem.get("lat");
+		var newLong = activeItem.get("long");
+		inventory.upsert(activeItem.get("ID"), {$set: {itemLocation: {lat: newLat, long: newLong}, timeStamp: timeStamp}});
 	}
 	$(".confirmAddress").modal("toggle");
 	location.reload();
@@ -73,13 +69,14 @@ initMap = function(myLatLong, mapDOM, markerTitle) {
 };
 
 maintClose = function () {
-	//TODO clear fields.
+	$("input[name='maintDate']").val("");
+	$("input[name='maintNote']").val("");
 	$(".maintenanceModal").modal("toggle");
 };
 
 maintOpen = function(ID) {
 	var item = inventory.findOne({itemID: "" + ID})._id;
-	activeItem.set(item);
+	activeItem.set("ID", item);
 	$(".maintenanceModal").modal("toggle");
 };
 
@@ -103,8 +100,8 @@ reMap = function() {
     	var newLong = results[0].geometry.location.B;
     	var myLatLong = new google.maps.LatLng(newLat, newLong);
     	$(".detectedAddress").html(results[0].formatted_address);
-    	$("#detectedMap").data("lat", newLat);
-    	$("#detectedMap").data("long", newLong);
+			activeItem.set("lat", newLat);
+			activeItem.set("long", newLong);
     	initMap(myLatLong, "detectedMap", newAddr);
     } else {
       alert('Geocode was not successful for the following reason: ' + status);
