@@ -81,7 +81,7 @@ maintOpen = function(ID) {
 };
 
 maintSubmit = function(ID) {
-	var ID = activeItem.get();
+	var ID = activeItem.get("ID");
 	var maintDate = $("input[name='maintDate']").val();
 	var maintNote = $("input[name='maintNote']").val();
 	var timeStamp = new Date();

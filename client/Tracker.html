@@ -27,7 +27,7 @@
       {{> maintenanceModal}}
     {{else}}
       Add an item to inventory
-      <!-- Don't forget to change the index of 'childNodes' in Tracker.js when you modify the layout of newItemForm.-->
+      <!-- Remember to change the index of 'childNodes' in Tracker.js when you modify the layout of newItemForm.-->
       <form id="newItemForm" class="headerSpacer">
         <input type="text" name="itemName" placeholder="Item description"/>
         <br />
@@ -121,6 +121,7 @@
           <h3>Maintenance Record</h3>
         </div>
         <div class="modal-body">
+          {{record._id}}
           {{#each record}}
 					<div>
 						Service date: <div class="maintUserText">{{date}}</div>
@@ -134,7 +135,7 @@
           <input name="maintNote" type="text" placeholder="Service performed" />
         </div>
         <div class="modal-footer">
-          <button name="maintSubmit" onclick="maintSubmit()">Submit</button>
+          <button name="maintSubmit" onclick="maintSubmit('{{record._id}}')">Submit</button>
           <button name="maintClose" onclick="maintClose()">Cancel</button>
         </div>
       </div>
