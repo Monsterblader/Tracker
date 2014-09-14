@@ -37,7 +37,8 @@ Meteor.methods({
     fs.unlink(path, function (err) {
       if (err)
         throw err;
-      console.log('successfully deleted' + name);
+      console.log('successfully deleted ' + name);
     });
+    return true;
   }
 });

@@ -1,7 +1,7 @@
 /**
  * @blob (https://developer.mozilla.org/en-US/docs/DOM/Blob)
  * @name the file's name
- * @type the file's type: binary, text (https://developer.mozilla.org/en-US/docs/DOM/FileReader#Methods) 
+ * @type the file's type: binary, text (https://developer.mozilla.org/en-US/docs/DOM/FileReader#Methods)
  *
  * TODO Support other encodings: https://developer.mozilla.org/en-US/docs/DOM/FileReader#Methods
  * ArrayBuffer / DataURL (base64)
@@ -15,7 +15,7 @@ Meteor.saveFile = function(blob, name, path, type, callback) {
       method = 'readAsText';
       encoding = 'utf8';
       break;
-    case 'binary': 
+    case 'binary':
       method = 'readAsBinaryString';
       encoding = 'binary';
       break;
@@ -26,6 +26,6 @@ Meteor.saveFile = function(blob, name, path, type, callback) {
   }
   fileReader.onload = function(file) {
     Meteor.call('saveFile', file.srcElement.result, name, path, encoding, callback);
-  }
+  };
   fileReader[method](blob);
-}
+};

@@ -57,10 +57,10 @@ delConfirm = function (ID) {
   //TODO Check that file is not still being used.
   //TODO Remove file.
   if ($("#delConfirm").val() === "Yes") {
-    debugger;
     var name = inventory.findOne(activeItem.get("ID")).itemImage;
     Meteor.call("delFile", name);
     inventory.remove(activeItem.get("ID"));
+    location.assign("/tracker");
   }
   $(".deleteModal").modal("toggle");
 };
