@@ -4,6 +4,10 @@ body {
   background-color: #6d6d6d;
 }
 
+.delBtn {
+  margin-top: 5px;
+}
+
 .detectedAddress {
   display: inline;
 }
@@ -47,7 +51,7 @@ img {
   vertical-align: middle;
 }
 
-.maintenance {
+.maintBtn {
   margin-top: 5px;
 }
 
