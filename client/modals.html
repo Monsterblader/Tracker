@@ -1,0 +1,87 @@
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<template name="modalKeeper">
+  {{> confirmAddressModal}}
+  {{> delItemModal}}
+  {{> maintenanceModal}}
+</template>
+
+<template name="confirmAddressModal">
+  <div class="confirmAddress modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Confirm your location</h3>
+        </div>
+        <div class="modal-body">
+          You appear to be at:
+          <h5 class="detectedAddress"></h5>
+          <div id="detectedMap" class="itemLocationMap"></div>
+          <br />
+          <p>If this is not correct, enter the correct address below</p>
+          <input type="text" name="altAddress" placeholder="Type your address here" />
+          <button name="remap" class="remap btn" onclick="reMap()">Get new map</button>
+        </div>
+        <div class="modal-footer">
+          <button name="checkOut" onclick="checkOutConfirm()">Check out</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="delItemModal">
+  <div class="deleteModal modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>ARE YOU SURE THAT YOU WANT TO DELETE THIS ITEM?</h3>
+        </div>
+        <div class="modal-body">
+          Type 'Yes' in the box to delete this item.
+          <br />
+          <strong>CAUTION!&nbsp; THIS OPERATION CANNOT BE UNDONE.</strong>
+          <br />
+          <input id='delConfirm' type='text' />
+        </div>
+        <div class="modal-footer">
+          <button name="confirmDel" onclick="delConfirm()">Delete</button>
+          <button name='cancelDel' onclick="delCancel()">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="maintenanceModal">
+  <div class="maintenanceModal modal fade" id="maintModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Maintenance Record</h3>
+        </div>
+        <div class="modal-body">
+          {{#each record}}
+          <div>
+            Service date: <div class="maintUserText">{{date}}</div>
+          </div>
+          <div>
+            Service performed: <div class="maintUserText">{{note}}</div>
+          </div>
+          <br />
+          {{/each}}
+          <input name="maintDate" type="date" placeholder="Date of service" />
+          <input name="maintNote" type="text" placeholder="Service performed" />
+        </div>
+        <div class="modal-footer">
+          <button name="maintSubmit" onclick="maintSubmit('{{record._id}}')">Submit</button>
+          <button name="maintClose" onclick="maintClose()">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

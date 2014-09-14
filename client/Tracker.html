@@ -23,9 +23,8 @@
       {{#each item}}
         {{> itemLayout}}
       {{/each}}
-      {{> confirmAddressModal}}
-      {{> maintenanceModal}}
-    {{else}}
+      {{> modalKeeper}}
+      {{else}}
       Add an item to inventory
       <!-- Remember to change the index of 'childNodes' in Tracker.js when you modify the layout of newItemForm.-->
       <form id="newItemForm" class="headerSpacer">
@@ -55,7 +54,8 @@
         <button name="checkIn" class="checkIn btn" data-toggle="modal" onclick="checkIn('{{this._id}}')">Check in</button>
         <button name="checkOut" class="checkOut btn" data-toggle="modal" onclick="checkOut('{{this._id}}')">Check out</button>
         <br />
-        <button name="maintenance" class="maintenance btn" data-toggle="modal" onclick="maintOpen({{this.itemID}})">Maintenance</button>
+        <button name="maintenance" class="maintBtn btn" data-toggle="modal" onclick="maintOpen('{{this._id}}')">Maintenance</button>
+        <button name="deleteItem" class="delBtn btn" data-toggle="modal" onclick="delItem('{{this._id}}')">Delete</button>
       </div>
     </div>
     <div id="map-{{this.itemID}}" class="dispInl itemLocationMap"></div>
@@ -85,60 +85,5 @@
   You have no inventory.
   {{/if}}
   </div>
-  {{> confirmAddressModal}}
-  {{> maintenanceModal}}
-</template>
-
-<template name="confirmAddressModal">
-  <div class="confirmAddress modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3>Confirm your location</h3>
-        </div>
-        <div class="modal-body">
-          You appear to be at:
-          <h5 class="detectedAddress"></h5>
-          <div id="detectedMap" class="itemLocationMap"></div>
-          <br />
-          <p>If this is not correct, enter the correct address below</p>
-          <input type="text" name="altAddress" placeholder="Type your address here" />
-          <button name="remap" class="remap btn" onclick="reMap()">Get new map</button>
-        </div>
-        <div class="modal-footer">
-          <button name="checkOut" onclick="checkOutConfirm()">Check out</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
-
-<template name="maintenanceModal">
-  <div class="maintenanceModal modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3>Maintenance Record</h3>
-        </div>
-        <div class="modal-body">
-          {{record._id}}
-          {{#each record}}
-					<div>
-						Service date: <div class="maintUserText">{{date}}</div>
-					</div>
-					<div>
-						Service performed: <div class="maintUserText">{{note}}</div>
-					</div>
-					<br />
-          {{/each}}
-          <input name="maintDate" type="date" placeholder="Date of service" />
-          <input name="maintNote" type="text" placeholder="Service performed" />
-        </div>
-        <div class="modal-footer">
-          <button name="maintSubmit" onclick="maintSubmit('{{record._id}}')">Submit</button>
-          <button name="maintClose" onclick="maintClose()">Cancel</button>
-        </div>
-      </div>
-    </div>
-  </div>
+  {{> modalKeeper}}
 </template>

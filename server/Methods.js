@@ -11,7 +11,7 @@ Meteor.methods({
     // any sort of attempt to go to the parent directory '..' and any empty directories in
     // between '/////' - which may happen after removing '..'
     path = chroot + (path ? '/' + path + '/' : '/');
-    
+
     // TODO Add file existence checks, etc...
     fs.writeFile(path + name, blob, encoding, function(err) {
       if (err) {
@@ -19,8 +19,8 @@ Meteor.methods({
       } else {
         console.log('The file ' + name + ' (' + encoding + ') was saved to ' + path);
       }
-    }); 
- 
+    });
+
     function cleanPath(str) {
       if (str) {
         return str.replace(/\.\./g,'').replace(/\/+/g,'').
@@ -30,5 +30,15 @@ Meteor.methods({
     function cleanName(str) {
       return str.replace(/\.\./g,'').replace(/\//g,'');
     }
+  },
+  delFile: function (name) {
+    var fs = Npm.require("fs");
+    var path = "../../../../../public/" + name;
+    fs.unlink(path, function (err) {
+      if (err)
+        throw err;
+      console.log('successfully deleted ' + name);
+    });
+    return true;
   }
 });
