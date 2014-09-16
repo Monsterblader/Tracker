@@ -7,7 +7,9 @@
 packages iron:router, mrt:googlemaps, bootstrap
 login/track user
 Confirm that file is deleted before record is deleted.
-Set up return key activation?
+Set up onkeyup return/enter key?
 Automatically set active boxes when new page/modal loaded?
+Service request - who, when, what
+User accounts - record who performs which actions
 
 bug: what if not all data entered when new item submitted?
