@@ -29,3 +29,4 @@ Meteor.saveFile = function(blob, name, path, type, callback) {
   };
   fileReader[method](blob);
 };
+

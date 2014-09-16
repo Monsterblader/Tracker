@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 Template.home.greeting = function () {
   return "Welcome to Tracker.";
 };
@@ -24,7 +18,7 @@ Template.item.events({
     itemName = template.find("input[name=itemName]");
     itemID = template.find("input[name=itemID]");
     itemImage = template.find("input[type=file]").files[0];
-    initialLocation = {lat: 37.0392772, long: -121.6286111};
+    initialLocation = HOMELOCATION;
 
     // Do form validation
 
@@ -73,8 +67,7 @@ Template.item.item = function () {
 
 Template.itemLayout.created = function () {
   var itemData = this.data;
-  GoogleMaps.init(
-          {
+  GoogleMaps.init({
             'sensor': true //optional
                     //'key': 'MY-GOOGLEMAPS-API-KEY', //optional
                     //'language': 'de' //optional
@@ -92,15 +85,7 @@ Template.itemLayout.created = function () {
       map: map,
       title: itemData.itemName
     });
-  }
-  );
-};
-
-Template.maintenanceModal.record = function () {
-  var record = activeItem.get("ID");
-  if (record) {
-    return inventory.find(record).fetch()[0].maintenance;
-  }
+  });
 };
 
 Template.tracker.inventoryList = function () {
