@@ -17,7 +17,7 @@
           <div id="detectedMap" class="itemLocationMap"></div>
           <br />
           <p>If this is not correct, enter the correct address below</p>
-          <input type="text" name="altAddress" placeholder="Type your address here" />
+          <input type="text" name="altAddress" placeholder="Type your address here" autofocus/>
           <button name="remap" class="remap btn" onclick="reMap()">Get new map</button>
         </div>
         <div class="modal-footer">
@@ -40,7 +40,7 @@
           <br />
           <strong>CAUTION!&nbsp; THIS OPERATION CANNOT BE UNDONE.</strong>
           <br />
-          <input id='delConfirm' type='text' />
+          <input id='delConfirm' type='text' autofocus/>
         </div>
         <div class="modal-footer">
           <button name="confirmDel" onclick="delConfirm()">Delete</button>
@@ -68,7 +68,7 @@
           </div>
           <br />
           {{/each}}
-          <input name="maintDate" type="date" placeholder="Date of service" />
+          <input name="maintDate" type="date" placeholder="Date of service" autofocus/>
           <input name="maintNote" type="text" placeholder="Service performed" />
         </div>
         <div class="modal-footer">

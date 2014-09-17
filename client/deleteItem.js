@@ -19,3 +19,9 @@ delItem = function (ID) {
   activeItem.set("ID", ID);
   $(".deleteModal").modal("toggle");
 };
+
+Template.delItemModal.events({
+  'keyup input': function (evt, templ) {
+    (evt.keyCode === 13) && delConfirm();
+  }
+});

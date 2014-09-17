@@ -45,3 +45,9 @@ checkOutConfirm = function () {
   $(".confirmAddress").modal("toggle");
   location.reload();
 };
+
+Template.confirmAddressModal.events({
+  'keyup input': function (evt, templ) {
+    (evt.keyCode === 13) && reMap();
+  }
+});

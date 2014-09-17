@@ -9,7 +9,7 @@ maintOpen = function (ID) {
   $(".maintenanceModal").modal("toggle");
 };
 
-maintSubmit = function (ID) {
+maintSubmit = function () {
   var ID = activeItem.get("ID");
   var maintDate = $("input[name='maintDate']").val();
   var maintNote = $("input[name='maintNote']").val();
@@ -17,7 +17,14 @@ maintSubmit = function (ID) {
   var record = {timeStamp: timeStamp, date: maintDate, note: maintNote, user: "asdf"};
   inventory.upsert(ID, {$push: {maintenance: record}});
   $(".maintenanceModal").modal("toggle");
+  $(".maintenanceModal input").val("");
 };
+
+Template.maintenanceModal.events({
+  'keyup input': function (evt, templ) {
+    (evt.keyCode === 13) && maintSubmit();
+  }
+});
 
 Template.maintenanceModal.record = function () {
   var record = activeItem.get("ID");
