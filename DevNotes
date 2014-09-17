@@ -7,7 +7,6 @@
 packages iron:router, mrt:googlemaps, bootstrap
 login/track user
 Confirm that file is deleted before record is deleted.
-Automatically set active boxes when new page/modal loaded?
 Service request - who, when, what
 User accounts - record who performs which actions
 Add autofocus, required when meteor releases v0.10.1
