@@ -28,13 +28,11 @@
       Add an item to inventory
       <!-- Remember to change the index of 'childNodes' in Tracker.js when you modify the layout of newItemForm.-->
       <form id="newItemForm" class="headerSpacer">
-        <input type="text" name="itemName" placeholder="Item description" autofocus="autofocus"/>
-        <br />
         <input type="text" name="itemID" placeholder="Item ID" value=""/>
         <br />
-        <input class="phone" type="file" name="itemCamera" enctype="multipart/form-data" accept="image/*" capture="camera">
+        <input type="text" name="itemName" placeholder="Item description" autofocus="autofocus"/>
         <br />
-        <input class="web" type="file" name="itemImage" enctype="multipart/form-data" accept="image/*">
+        <input class="phone" type="file" name="itemCamera" formenctype="multipart/form-data" accept="image/*" capture="camera">
         <br />
         <input type="submit" id="submit"/>
       </form>
