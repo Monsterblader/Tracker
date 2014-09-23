@@ -7,5 +7,5 @@ meteor-platform
 insecure
 iron:router
 bootstrap
-googlemaps
+mrt:googlemaps@0.0.2
 reactive-dict
