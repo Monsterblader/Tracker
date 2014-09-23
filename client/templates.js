@@ -15,10 +15,10 @@ Template.item.events({
     var reader = new FileReader();
     event.preventDefault();
 
-    itemName = template.find("input[name=itemName]");
-    itemID = template.find("input[name=itemID]");
-    itemImage = template.find("input[type=file]").files[0];
-    initialLocation = HOMELOCATION;
+    var itemName = template.find("input[name=itemName]");
+    var itemID = template.find("input[name=itemID]");
+    var itemImage = template.find("input[type=file]").files[0];
+    var initialLocation = HOMELOCATION;
 
     // Do form validation
 
@@ -28,10 +28,6 @@ Template.item.events({
       itemImage: itemImage.name,
       itemLocation: initialLocation
     };
-
-    itemName.value = "";
-    itemID.value = "";
-    template.find("input[name=itemImage]").value = "";
 
     inventory.insert(data, function (err) {
       console.log(err);
@@ -47,6 +43,9 @@ Template.item.events({
       console.log("result: " + result);
 //    });
     });
+    itemName.value = "";
+    itemID.value = "";
+    template.find("input[name=itemCamera]").value = "";
   }
 });
 
